@@ -61,7 +61,7 @@ export const Timeline = ({ project, onReleaseClick }: TimelineProps) => {
         </div>
 
         {/* Release Markers & Boxes */}
-        <div className="relative mt-4 pb-72"> {/* Add padding to contain all boxes */}
+        <div className="relative mt-4 pb-40"> {/* Reduced padding from pb-72 to pb-40 */}
           {project.releases.map((release) => {
             const position = getRelativePosition(release.date);
             const isPast = isReleaseInPast(release.date);
