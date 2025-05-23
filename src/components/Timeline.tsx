@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { format, differenceInDays } from 'date-fns';
-import { Tag, Clock } from 'lucide-react';
+import { Tag, Clock, FileText } from 'lucide-react';
 import { Project, Release } from '@/components/ProjectCard';
 
 interface TimelineProps {
@@ -60,17 +60,20 @@ export const Timeline = ({ project, onReleaseClick }: TimelineProps) => {
           )}
         </div>
 
-        {/* Release Markers */}
-        <div className="relative mt-4">
+        {/* Release Markers & Boxes */}
+        <div className="relative mt-4 pb-72"> {/* Add padding to contain all boxes */}
           {project.releases.map((release) => {
             const position = getRelativePosition(release.date);
             const isPast = isReleaseInPast(release.date);
+            
+            // Adjust position to prevent boxes from going off-screen
+            const adjustedPosition = Math.min(Math.max(position, 15), 85);
             
             return (
               <div
                 key={release.id}
                 className="absolute transform -translate-x-1/2"
-                style={{ left: `${position}%` }}
+                style={{ left: `${adjustedPosition}%` }}
               >
                 {/* Release Marker */}
                 <div 
@@ -81,33 +84,40 @@ export const Timeline = ({ project, onReleaseClick }: TimelineProps) => {
                   }`}
                 />
                 
-                {/* Release Info */}
-                <div className="mt-3 text-center min-w-max">
-                  <Badge 
-                    variant={isPast ? "default" : "outline"}
-                    className={`mb-2 ${isPast ? 'bg-green-100 text-green-800 border-green-200' : 'border-blue-200'}`}
+                {/* Release Info Box */}
+                <div className="mt-3">
+                  <div 
+                    className={`
+                      p-3 rounded-lg shadow-md border bg-white max-w-[220px]
+                      ${isPast ? 'border-l-4 border-l-green-500' : 'border-l-4 border-l-blue-400'}
+                    `}
                   >
-                    <Tag className="h-3 w-3 mr-1" />
-                    {release.version}
-                  </Badge>
-                  
-                  <div className="space-y-1">
-                    <div className="font-medium text-sm text-slate-900">
-                      {release.title}
-                    </div>
-                    <div className="text-xs text-slate-500 flex items-center justify-center gap-1">
-                      <Clock className="h-3 w-3" />
-                      {format(release.date, 'MMM d, yyyy')}
-                    </div>
-                    
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => onReleaseClick(release)}
-                      className="mt-2 text-xs h-7 px-2 hover:bg-blue-50 hover:border-blue-300"
+                    <Badge 
+                      variant={isPast ? "default" : "outline"}
+                      className={`mb-2 ${isPast ? 'bg-green-100 text-green-800 border-green-200' : 'border-blue-200'} inline-flex`}
                     >
-                      View Details
-                    </Button>
+                      <Tag className="h-3 w-3 mr-1" />
+                      {release.version}
+                    </Badge>
+                    
+                    <div className="space-y-1">
+                      <div className="font-medium text-sm text-slate-900 line-clamp-2">
+                        {release.title}
+                      </div>
+                      <div className="text-xs text-slate-500 flex items-center gap-1">
+                        <Clock className="h-3 w-3 flex-shrink-0" />
+                        <span className="truncate">{format(release.date, 'MMM d, yyyy')}</span>
+                      </div>
+                      
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => onReleaseClick(release)}
+                        className="mt-2 text-xs h-7 w-full hover:bg-blue-50 hover:border-blue-300"
+                      >
+                        View Details
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
