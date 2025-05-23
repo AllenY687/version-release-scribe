@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { 
-  GitTag, 
+  Tag, 
   Calendar, 
   FileText, 
   Download, 
@@ -52,7 +52,7 @@ export const ReleaseDialog = ({ release, open, onOpenChange }: ReleaseDialogProp
         <DialogHeader>
           <DialogTitle className="flex items-center gap-3 text-xl">
             <div className="p-2 bg-blue-100 rounded-lg">
-              <GitTag className="h-5 w-5 text-blue-600" />
+              <Tag className="h-5 w-5 text-blue-600" />
             </div>
             <div>
               <div className="font-semibold">{release.title}</div>
@@ -72,7 +72,7 @@ export const ReleaseDialog = ({ release, open, onOpenChange }: ReleaseDialogProp
                 <span>Released on {format(release.date, 'MMMM d, yyyy')}</span>
               </div>
               <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                <GitTag className="h-3 w-3 mr-1" />
+                <Tag className="h-3 w-3 mr-1" />
                 {release.version}
               </Badge>
             </div>

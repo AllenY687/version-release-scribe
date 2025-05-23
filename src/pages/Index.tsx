@@ -1,19 +1,19 @@
 
 import { useState } from 'react';
-import { ProjectCard } from '@/components/ProjectCard';
+import { ProjectCard, Project } from '@/components/ProjectCard';
 import { CreateProjectDialog } from '@/components/CreateProjectDialog';
 import { Button } from '@/components/ui/button';
 import { Plus, FolderOpen } from 'lucide-react';
 
 // Mock data for demonstration
-const mockProjects = [
+const mockProjects: Project[] = [
   {
     id: '1',
     name: 'Web Platform Redesign',
     description: 'Complete overhaul of the customer-facing web platform with modern UI/UX',
     startDate: new Date('2024-01-15'),
     endDate: new Date('2024-06-30'),
-    status: 'active' as const,
+    status: 'active',
     releases: [
       {
         id: 'r1',
@@ -22,8 +22,8 @@ const mockProjects = [
         title: 'Initial Alpha Release',
         notes: 'First working prototype with basic functionality including user authentication, dashboard layout, and core navigation.',
         attachments: [
-          { name: 'Design Mockups.figma', size: '2.4 MB', type: 'design' },
-          { name: 'Technical Specs.pdf', size: '1.2 MB', type: 'document' }
+          { name: 'Design Mockups.figma', size: '2.4 MB', type: 'design' as const },
+          { name: 'Technical Specs.pdf', size: '1.2 MB', type: 'document' as const }
         ]
       },
       {
@@ -33,8 +33,8 @@ const mockProjects = [
         title: 'Beta Release',
         notes: 'Feature-complete beta with user testing feedback incorporated. Includes advanced search, real-time notifications, and mobile responsiveness.',
         attachments: [
-          { name: 'Beta Test Results.xlsx', size: '850 KB', type: 'document' },
-          { name: 'Performance Report.pdf', size: '1.8 MB', type: 'document' }
+          { name: 'Beta Test Results.xlsx', size: '850 KB', type: 'document' as const },
+          { name: 'Performance Report.pdf', size: '1.8 MB', type: 'document' as const }
         ]
       },
       {
@@ -44,8 +44,8 @@ const mockProjects = [
         title: 'Production Release',
         notes: 'Final production release with all features implemented and thoroughly tested. Ready for public launch.',
         attachments: [
-          { name: 'Release Checklist.pdf', size: '500 KB', type: 'document' },
-          { name: 'Deployment Guide.md', size: '45 KB', type: 'document' }
+          { name: 'Release Checklist.pdf', size: '500 KB', type: 'document' as const },
+          { name: 'Deployment Guide.md', size: '45 KB', type: 'document' as const }
         ]
       }
     ]
@@ -56,7 +56,7 @@ const mockProjects = [
     description: 'Native iOS and Android applications for customer engagement',
     startDate: new Date('2024-03-01'),
     endDate: new Date('2024-10-15'),
-    status: 'active' as const,
+    status: 'active',
     releases: [
       {
         id: 'r4',
@@ -65,8 +65,8 @@ const mockProjects = [
         title: 'MVP Release',
         notes: 'Minimum viable product with core features: user registration, basic dashboard, and push notifications.',
         attachments: [
-          { name: 'App Store Screenshots.zip', size: '15.2 MB', type: 'design' },
-          { name: 'MVP Requirements.docx', size: '2.1 MB', type: 'document' }
+          { name: 'App Store Screenshots.zip', size: '15.2 MB', type: 'design' as const },
+          { name: 'MVP Requirements.docx', size: '2.1 MB', type: 'document' as const }
         ]
       },
       {
@@ -76,7 +76,7 @@ const mockProjects = [
         title: 'Full Release',
         notes: 'Complete mobile application with all planned features including offline mode, advanced analytics, and social features.',
         attachments: [
-          { name: 'App Store Listing.pdf', size: '3.2 MB', type: 'document' }
+          { name: 'App Store Listing.pdf', size: '3.2 MB', type: 'document' as const }
         ]
       }
     ]
@@ -87,7 +87,7 @@ const mockProjects = [
     description: 'Scalable backend API architecture for all client applications',
     startDate: new Date('2023-11-01'),
     endDate: new Date('2024-05-30'),
-    status: 'completed' as const,
+    status: 'completed',
     releases: [
       {
         id: 'r6',
@@ -96,9 +96,9 @@ const mockProjects = [
         title: 'Architecture Overhaul',
         notes: 'Complete rewrite of the API using microservices architecture. Improved performance by 300% and added comprehensive monitoring.',
         attachments: [
-          { name: 'Architecture Diagram.png', size: '1.8 MB', type: 'design' },
-          { name: 'Migration Guide.pdf', size: '4.5 MB', type: 'document' },
-          { name: 'Performance Benchmarks.xlsx', size: '1.1 MB', type: 'document' }
+          { name: 'Architecture Diagram.png', size: '1.8 MB', type: 'design' as const },
+          { name: 'Migration Guide.pdf', size: '4.5 MB', type: 'document' as const },
+          { name: 'Performance Benchmarks.xlsx', size: '1.1 MB', type: 'document' as const }
         ]
       },
       {
@@ -108,8 +108,8 @@ const mockProjects = [
         title: 'Feature Enhancement',
         notes: 'Added advanced caching, real-time WebSocket support, and comprehensive API documentation.',
         attachments: [
-          { name: 'API Documentation.pdf', size: '6.8 MB', type: 'document' },
-          { name: 'WebSocket Guide.md', size: '125 KB', type: 'document' }
+          { name: 'API Documentation.pdf', size: '6.8 MB', type: 'document' as const },
+          { name: 'WebSocket Guide.md', size: '125 KB', type: 'document' as const }
         ]
       }
     ]

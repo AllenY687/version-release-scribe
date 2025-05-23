@@ -1,8 +1,7 @@
-
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { format, differenceInDays } from 'date-fns';
-import { GitTag, Clock } from 'lucide-react';
+import { Tag, Clock } from 'lucide-react';
 import { Project, Release } from '@/components/ProjectCard';
 
 interface TimelineProps {
@@ -87,7 +86,7 @@ export const Timeline = ({ project, onReleaseClick }: TimelineProps) => {
                     variant={isPast ? "default" : "outline"}
                     className={`mb-2 ${isPast ? 'bg-green-100 text-green-800 border-green-200' : 'border-blue-200'}`}
                   >
-                    <GitTag className="h-3 w-3 mr-1" />
+                    <Tag className="h-3 w-3 mr-1" />
                     {release.version}
                   </Badge>
                   
