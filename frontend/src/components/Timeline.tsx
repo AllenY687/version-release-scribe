@@ -14,6 +14,8 @@ export const Timeline = ({ project, onReleaseClick }: TimelineProps) => {
   const totalDays = differenceInDays(project.endDate, project.startDate);
   const today = new Date();
   
+
+  // flagged for change
   const getRelativePosition = (date: Date) => {
     const daysFromStart = differenceInDays(date, project.startDate);
     return Math.max(0, Math.min(100, (daysFromStart / totalDays) * 100));
@@ -25,12 +27,14 @@ export const Timeline = ({ project, onReleaseClick }: TimelineProps) => {
     return getRelativePosition(today);
   };
 
+  // end of flagged for change
+
   const isReleaseInPast = (date: Date) => date <= today;
 
   return (
-    <div className="space-y-6">
+    <div className="overflow-x-auto w-full p-4">
       {/* Timeline Header */}
-      <div className="flex justify-between text-sm text-slate-600">
+      <div className="flex space-x-8 min-w-max">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-slate-300 rounded-full"></div>
           <span>Start: {format(project.startDate, 'MMM d, yyyy')}</span>
@@ -44,7 +48,7 @@ export const Timeline = ({ project, onReleaseClick }: TimelineProps) => {
       {/* Main Timeline */}
       <div className="relative">
         {/* Timeline Track */}
-        <div className="h-2 bg-slate-200 rounded-full relative overflow-hidden">
+        <div className="h-2 bg-slate-200 rounded-full relative">
           {/* Progress Bar */}
           <div 
             className="h-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-500 ease-out"
@@ -61,7 +65,7 @@ export const Timeline = ({ project, onReleaseClick }: TimelineProps) => {
         </div>
 
         {/* Release Markers & Boxes */}
-        <div className="relative mt-4 pb-40"> {/* Reduced padding from pb-72 to pb-40 */}
+        <div className="relative mt-4 pb-40"> 
           {project.releases.map((release) => {
             const position = getRelativePosition(release.date);
             const isPast = isReleaseInPast(release.date);
