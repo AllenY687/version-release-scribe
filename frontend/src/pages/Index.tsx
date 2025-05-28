@@ -35,7 +35,7 @@ const Index = () => {
               name: release.repository?.name || 'Untitled Project',
               description: release.repository?.description || 'No description available',
               startDate: new Date(release.created_at),
-              endDate: new Date(),
+              endDate: addDays(new Date(), 5),
               status: 'active',
               releases: []
             });
@@ -57,36 +57,6 @@ const Index = () => {
             })) || []
           });
         });
-
-        // // Process each project to space out releases
-        // projectMap.forEach((project) => {
-        //   // Sort releases by date (newest first)
-        //   project.releases.sort((a, b) => b.date.getTime() - a.date.getTime());
-          
-        //   // Space out releases by at least 7 days
-        //   const SPACING_DAYS = 7;
-        //   let lastDate = new Date(project.releases[0].date);
-          
-        //   project.releases.forEach((release, index) => {
-        //     if (index > 0) {
-        //       // Calculate the minimum date for this release
-        //       const minDate = addDays(lastDate, -SPACING_DAYS);
-              
-        //       // If the release's date is after the minimum date, adjust it
-        //       if (release.date > minDate) {
-        //         release.date = minDate;
-        //       }
-              
-        //       lastDate = release.date;
-        //     }
-        //   });
-          
-        //   // Update project dates based on spaced releases
-        //   if (project.releases.length > 0) {
-        //     project.startDate = project.releases[project.releases.length - 1].date;
-        //     project.endDate = project.releases[0].date;
-        //   }
-        // });
 
         setProjects(Array.from(projectMap.values()));
       } catch (error) {
