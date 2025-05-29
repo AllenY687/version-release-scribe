@@ -16,7 +16,9 @@ export interface Release {
   attachments: Array<{
     name: string;
     size: string;
-    type: 'document' | 'design' | 'code';
+    type: 'document' | 'design' | 'code' | 'image' | 'video';
+    url: string;
+    contentType: string;
   }>;
 }
 
@@ -33,6 +35,14 @@ export interface Project {
 interface ProjectCardProps {
   project: Project;
 }
+
+export const getAttachmentType = (contentType: string): Release['attachments'][0]['type'] => {
+  if (contentType.startsWith('image/')) return 'image';
+  if (contentType.startsWith('video/')) return 'video';
+  if (contentType === 'application/pdf') return 'document';
+  // Add more types if needed
+  return 'document';
+};
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
   const [selectedRelease, setSelectedRelease] = useState<Release | null>(null);

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ProjectCard, Project } from '@/components/ProjectCard';
+import { ProjectCard, Project, getAttachmentType } from '@/components/ProjectCard';
 import { CreateProjectDialog } from '@/components/CreateProjectDialog';
 import { Button } from '@/components/ui/button';
 import { Plus, FolderOpen, Loader2 } from 'lucide-react';
@@ -57,7 +57,9 @@ const Index = () => {
             attachments: release.assets?.map((asset: any) => ({
               name: asset.name,
               size: `${(asset.size / 1024 / 1024).toFixed(1)} MB`,
-              type: 'document' as const
+              type: getAttachmentType(asset.content_type),
+              url: asset.browser_download_url,
+              contentType: asset.content_type,
             })) || []
           });
         });

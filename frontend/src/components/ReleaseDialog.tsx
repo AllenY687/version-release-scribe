@@ -14,8 +14,8 @@ import {
   Calendar, 
   FileText, 
   Download, 
-  Palette,
-  Code,
+  Image,
+  Video,
   ExternalLink 
 } from 'lucide-react';
 import { format } from 'date-fns';
@@ -32,16 +32,16 @@ export const ReleaseDialog = ({ release, open, onOpenChange }: ReleaseDialogProp
 
   const getAttachmentIcon = (type: string) => {
     switch (type) {
-      case 'design': return <Palette className="h-4 w-4" />;
-      case 'code': return <Code className="h-4 w-4" />;
+      case 'image': return <Image className="h-4 w-4" />;
+      case 'video': return <Video className="h-4 w-4" />;
       default: return <FileText className="h-4 w-4" />;
     }
   };
 
   const getAttachmentColor = (type: string) => {
     switch (type) {
-      case 'design': return 'bg-purple-100 text-purple-800 border-purple-200';
-      case 'code': return 'bg-green-100 text-green-800 border-green-200';
+      case 'image': return 'bg-purple-100 text-purple-800 border-purple-200';
+      case 'video': return 'bg-green-100 text-green-800 border-green-200';
       default: return 'bg-blue-100 text-blue-800 border-blue-200';
     }
   };
@@ -117,12 +117,18 @@ export const ReleaseDialog = ({ release, open, onOpenChange }: ReleaseDialogProp
                           </div>
                         </div>
                         <div className="flex gap-2">
-                          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                            <ExternalLink className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                            <Download className="h-4 w-4" />
-                          </Button>
+
+                          <a href={attachment.url} target="_blank" rel="noopener noreferrer">
+                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                              <ExternalLink className="h-4 w-4" />
+                            </Button>
+                          </a>
+
+                          <a href={attachment.url} download>
+                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                              <Download className="h-4 w-4" />
+                            </Button>
+                          </a>
                         </div>
                       </div>
                     ))}
