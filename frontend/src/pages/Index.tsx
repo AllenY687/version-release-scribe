@@ -6,6 +6,8 @@ import { Plus, FolderOpen, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { addDays } from 'date-fns';
 
+const POLL_INTERVAL = 60_000; // 1 minute in milliseconds
+
 const Index = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
@@ -13,6 +15,8 @@ const Index = () => {
   const { toast } = useToast();
 
   useEffect(() => {
+    let intervalId: NodeJS.Timeout;
+
     const fetchProjects = async () => {
       try {
         const response = await fetch('http://localhost:3001/api/releases');
@@ -72,6 +76,8 @@ const Index = () => {
     };
 
     fetchProjects();
+    intervalId = setInterval(fetchProjects, POLL_INTERVAL);
+    return () => clearInterval(intervalId);
   }, [toast]);
 
   const handleCreateProject = (projectData: any) => {
