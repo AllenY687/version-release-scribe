@@ -6,6 +6,7 @@ const path = require('path');
 const cors = require('cors');
 const axios = require('axios');
 const app = express();
+const fetchCommits = require('./generateReleaseNotes');
 const PORT = 3001;
 
 const BASE_DIR = path.join(__dirname, 'api', 'releases');
@@ -91,6 +92,15 @@ app.get('/api/releases', async (req, res) => {
   } catch (err) {
     console.error('Failed to aggregate releases:', err);
     res.status(500).json({ error: 'Failed to fetch releases' });
+  }
+});
+
+app.get('/api/commits', async (req, res) => {
+  try {
+    const commits = await fetchCommits();
+    res.json(commits);
+  } catch (err) {
+    res.status(500).json({ error: 'Could not fetch commits' });
   }
 });
 

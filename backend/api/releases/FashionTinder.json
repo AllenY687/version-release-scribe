@@ -1,0 +1,42 @@
+[
+  {
+    "url": "https://api.github.com/repos/AllenY687/FashionTinder/releases/221873396",
+    "assets_url": "https://api.github.com/repos/AllenY687/FashionTinder/releases/221873396/assets",
+    "upload_url": "https://uploads.github.com/repos/AllenY687/FashionTinder/releases/221873396/assets{?name,label}",
+    "html_url": "https://github.com/AllenY687/FashionTinder/releases/tag/v0.0.1",
+    "id": 221873396,
+    "author": {
+      "login": "AllenY687",
+      "id": 26258642,
+      "node_id": "MDQ6VXNlcjI2MjU4NjQy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26258642?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/AllenY687",
+      "html_url": "https://github.com/AllenY687",
+      "followers_url": "https://api.github.com/users/AllenY687/followers",
+      "following_url": "https://api.github.com/users/AllenY687/following{/other_user}",
+      "gists_url": "https://api.github.com/users/AllenY687/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/AllenY687/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/AllenY687/subscriptions",
+      "organizations_url": "https://api.github.com/users/AllenY687/orgs",
+      "repos_url": "https://api.github.com/users/AllenY687/repos",
+      "events_url": "https://api.github.com/users/AllenY687/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/AllenY687/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "node_id": "RE_kwDOHaUi9c4NOYT0",
+    "tag_name": "v0.0.1",
+    "target_commitish": "main",
+    "name": "Test initial release",
+    "draft": false,
+    "prerelease": false,
+    "created_at": "2022-05-28T20:43:52Z",
+    "published_at": "2025-05-29T15:45:53Z",
+    "assets": [],
+    "tarball_url": "https://api.github.com/repos/AllenY687/FashionTinder/tarball/v0.0.1",
+    "zipball_url": "https://api.github.com/repos/AllenY687/FashionTinder/zipball/v0.0.1",
+    "body": "Release test."
+  }
+]
