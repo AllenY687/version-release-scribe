@@ -21,7 +21,7 @@ function summarizeCommits(commitText) {
       }
     });
 
-    py.stdin.write(JSON.stringify({ commitText }));
+    py.stdin.write(JSON.stringify(commitText));
     py.stdin.end();
   });
 }

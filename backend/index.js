@@ -11,7 +11,8 @@ const PORT = 3001;
 
 const BASE_DIR = path.join(__dirname, 'api', 'releases');
 
-app.use(express.json());
+app.use(express.json({ limit: '5mb' }));
+
 
 
 let cachedReleases = [];
