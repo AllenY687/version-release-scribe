@@ -3,15 +3,16 @@ require('dotenv').config();
 const express = require('express');
 const fs = require('fs/promises');
 const path = require('path');
-const cors = require('cors');
 const axios = require('axios');
 const app = express();
 const fetchCommits = require('./generateReleaseNotes');
+const summarizeCommits = require('./summarizer');
 const PORT = 3001;
 
 const BASE_DIR = path.join(__dirname, 'api', 'releases');
 
-app.use(cors({origin: 'http://localhost:8080'}));
+app.use(express.json());
+
 
 let cachedReleases = [];
 
@@ -52,13 +53,13 @@ async function fetchAllReleases() {
         await fs.mkdir(BASE_DIR, { recursive: true });
         await fs.writeFile(outputPath, JSON.stringify(releases, null, 2));
 
-        console.log(`Fetched releases for ${projectName}`);
+        //console.log(`Fetched releases for ${projectName}`);
       } catch (repoErr) {
-        console.warn(`Could not fetch releases for ${projectName}:`, repoErr.message);
+        //console.warn(`Could not fetch releases for ${projectName}:`, repoErr.message);
       }
     }
   } catch (err) {
-    console.error('Failed to fetch repositories:', err.message);
+    //console.error('Failed to fetch repositories:', err.message);
   }
 }
 
@@ -101,6 +102,41 @@ app.get('/api/commits', async (req, res) => {
     res.json(commits);
   } catch (err) {
     res.status(500).json({ error: 'Could not fetch commits' });
+  }
+});
+
+app.post("/summarize", async (req, res) => {
+  try {
+    const commitText = req.body.commits;
+
+    console.log("=== Commit Text ===");
+    console.log(JSON.stringify({commitText}, null, 2));
+    console.log("===========================");
+
+
+    const summary = await summarizeCommits(commitText);
+
+    res.send({ summary });
+  } catch (err) {
+    res.status(500).send({ error: err.message });
+  }
+});
+
+app.get("/api/generated-release-notes", async (req, res) => {
+  try {
+    const rawCommits = await fetchCommits();
+
+    const summaryResponse = await axios.post("http://localhost:3001/summarize", {
+      commits: rawCommits
+    });
+
+    console.log("=== Summary from Python ===");
+    console.log(summaryResponse.data.summary);
+    console.log("===========================");
+
+    res.send({ summary: summaryResponse.data.summary });
+  } catch (err) {
+    res.status(500).send({ error: err.message });
   }
 });
 

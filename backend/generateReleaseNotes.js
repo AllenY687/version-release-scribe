@@ -8,7 +8,7 @@ const branch = 'main';           // Or 'master'
 async function fetchCommits() {
   try {
     const response = await axios.get(
-      `https://api.github.com/repos/${owner}/${repo}/commits?sha=${branch}&per_page=20`,
+      `https://api.github.com/repos/${owner}/${repo}/commits?sha=${branch}&per_page=1`,
       {
         headers: {
           Authorization: `token ${process.env.COMPANY_TOKEN}`,
