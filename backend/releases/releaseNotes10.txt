@@ -1,0 +1,7 @@
+## Summary
+- Author(s): Shrinjay Mukherjee
+- Date: 2025-05-29
+- Features:
+- Bug fixes:
+  - Fixed issue with automatic capitalization of discount codes.
+- Breaking Changes:

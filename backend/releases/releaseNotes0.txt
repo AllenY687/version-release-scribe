@@ -1,0 +1,7 @@
+## Summary
+- Author(s): Shrinjay Mukherjee
+- Date: 2025-06-05
+- Features: None
+- Bug fixes:
+  - Fixed issue by ensuring the application waits for authentication success before redirecting.
+- Breaking Changes: None
