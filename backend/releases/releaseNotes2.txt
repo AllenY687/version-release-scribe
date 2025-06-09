@@ -1,0 +1,11 @@
+## Summary
+- Author(s): Shrinjay Mukherjee
+- Date: 2025-06-05
+- Features: 
+  - None
+- Bug fixes:
+  - Disabled Klaviyo, GA, and FB integrations on EC.
+  - Fixed issue of emitting events in external order integrations.
+  - Limited Klaviyo events to only emit on transition from incomplete to pending.
+- Breaking Changes: 
+  - None

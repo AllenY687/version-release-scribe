@@ -1,0 +1,6 @@
+## Summary
+- Author(s): Shrinjay Mukherjee
+- Date: 2025-06-03
+- Features: None
+- Bug fixes: Removed order delivered state
+- Breaking Changes: None

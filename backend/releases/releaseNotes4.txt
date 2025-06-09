@@ -1,0 +1,6 @@
+## Summary
+- Author(s): Shrinjay Mukherjee
+- Date: 2025-06-04
+- Features: Update of variants for improved functionality.
+- Bug fixes: Fixed issues related to Follow Ups.
+- Breaking Changes: None.

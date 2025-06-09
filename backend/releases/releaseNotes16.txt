@@ -1,0 +1,26 @@
+## Summary
+- Author(s): Shrinjay Mukherjee
+- Date: 2025-05-28
+
+### Features:
+- Added various foreign keys and constraints to RxSkin tables.
+- Introduced shipping address foreign key to `claim_order`.
+- Implemented new event types for file uploads.
+- Added loading state to admin orders search.
+- Implemented location holds with FedEx and Canada Post.
+- Enhanced automated medication filling based on patient data.
+- Developed an archive feature for orders, including soft/ hard deletion methods.
+- Created a new tagging feature and improved subscription management.
+- Introduced functionality for customer message interactions.
+
+### Bug fixes:
+- Fixed issues with capturing payments in preprod environments.
+- Improved efficiency of cron jobs and order event processing.
+- Corrected shipping method foreign key relations.
+- Solved multiple discount code handling in orders.
+- Made various UI adjustments, including modal behavior and component loading.
+- Addressed permission issues related to role-based access.
+
+### Breaking Changes:
+- Removed old internal message boilerplate.
+- Updated routing and authentication structures in various components.

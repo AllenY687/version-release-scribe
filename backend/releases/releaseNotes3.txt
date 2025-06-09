@@ -1,0 +1,24 @@
+## Summary
+- Author(s): Shrinjay Mukherjee
+- Date: 2025-06-04
+
+### Features:
+- Added loading state to admin orders search, displaying a spinner when data is being fetched and the array is empty.
+- Implemented location holds feature with FedEx and Canada Post options.
+- Added open table functionality for questionnaire responses, including mobile view, and removed rows with a trash icon.
+- Improved order cancellation logic for automated processes.
+- Introduced functionality to archive and unarchive orders, with associated state updates and cron jobs for order management.
+- Enhanced messaging system, allowing for internal and external messages, with new message types and routing.
+- Added a new customer subscription management system supporting multiple payment providers and subscription tracking.
+- Introduced Klaviyo SMS integration for incoming message processing.
+
+### Bug fixes:
+- Resolved issues with displaying medications questions and fixed multiple discounts handling.
+- Improved shipping costs management and error handling for failed conversions.
+- Various improvements to UI and user experience, including button alignments and mobile view adjustments.
+- Resolved final touches on various features, ensuring proper functioning and performance enhancements for different components.
+- Fixed migration conflicts and ensured database changes do not cause issues.
+
+### Breaking Changes:
+- Changes to permission model and middleware which may require adjustments in user roles and access control.
+- Subscription management has been updated to support additional external providers which might affect existing configurations.

@@ -1,0 +1,32 @@
+## Summary
+- **Author(s):** Shrinjay Mukherjee and others
+- **Date:** 2025-06-04
+
+### Features:
+- Integrated Klaviyo SMS webhook to handle incoming SMS events.
+- Implemented enhancements for order management:
+  - Added loading states to admin orders search.
+  - Introduced `Order Archived` event to Klaviyo.
+  - Created methods for archiving and unarchiving orders.
+  - Added state for customer interfaces and message notifications.
+  - Improved external subscription handling with new provider options and migration for tracking.
+  - Introduced additional UI components like dynamic tables for questionnaire responses.
+- Extended functionality for admin messages and customer interactions with messaging hooks and UI improvements.
+- Developed support for new authentication methods and reduced API calls for better performance.
+- Created a tagging feature for better data organization.
+- Enhanced order and payment handling logic across modules.
+
+### Bug fixes:
+- Resolved multiple build issues.
+- Fixed inconsistent behaviors, including notifications and discount handling.
+- Improved error handling and response for various features.
+- Addressed styling and UI alignment problems across multiple components.
+- Corrected logic in order processing and message events.
+- Fixed migration issues to ensure smoother transitions and API stability.
+  
+### Breaking Changes:
+- Changes to subscription management may affect existing integrations; review migration steps for external providers.
+- Refactoring of order processing may require updates to related services, particularly those interacting with new order IDs or states.
+- Adjustments in message delivery methods may have impacts on existing email and SMS notification flows. 
+
+**Note:** Thorough testing of new features and bug fixes is recommended, as multiple enhancements were implemented in this release.

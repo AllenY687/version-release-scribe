@@ -19,7 +19,7 @@ const Index = () => {
 
     const fetchProjects = async () => {
       try {
-        const response = await fetch('/api/releases');
+        const response = await fetch('/api/disk-release-notes');
         if (!response.ok) {
           throw new Error('Failed to fetch projects');
         }
