@@ -9,8 +9,11 @@ The frontent is a vite -> TypeScript + React project. Navigate to the /frontend 
 
 Version release scribe currently saves generated release notes on disk under /backend/releases. 
 A python script is used to fetch commits from branch `main` and pipe the messages into ChatGPT using an OpenAI key to create LLM-generated human-readable notes.
-TO generate new notes, you will need to add a `COMPANY_TOKEN` that has access to the codebase's commits as well as an `OPENAI_API_KEY` to .env under /backend. 
+To generate new notes, you will need to add a `COMPANY_TOKEN` that has access to the codebase's commits as well as an `OPENAI_API_KEY` to .env under /backend. 
 Generate new notes by hosting the backend and then visiting the /api/generated-release-notes endpoint (on browser or through curl).
+
+## Project demo
+https://drive.google.com/file/d/1qaJl1WDRJW7pNm21qq2P6zbqfD6hMKW_/view?usp=sharing
 
 ## What technologies are used for this project?
 
