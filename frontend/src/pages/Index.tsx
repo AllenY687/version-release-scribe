@@ -8,6 +8,8 @@ import { addDays } from 'date-fns';
 
 const POLL_INTERVAL = 60_000; // 1 minute in milliseconds
 
+
+
 const Index = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
@@ -19,12 +21,16 @@ const Index = () => {
 
     const fetchProjects = async () => {
       try {
+        // marked for modification
+
         const response = await fetch('/api/disk-release-notes');
         if (!response.ok) {
           throw new Error('Failed to fetch projects');
         }
         const releases = await response.json();
         console.log('Fetched releases:', releases);
+
+        // fetch local files, not through api to backend
         
         // Group releases by project (repository)
         const projectMap = new Map<string, Project>();
@@ -106,6 +112,7 @@ const Index = () => {
                 <p className="text-slate-600">Track your projects and releases</p>
               </div>
             </div>
+
             <Button 
               onClick={() => setIsCreateDialogOpen(true)}
               className="bg-blue-600 hover:bg-blue-700 text-white"
@@ -113,6 +120,7 @@ const Index = () => {
               <Plus className="h-4 w-4 mr-2" />
               New Project
             </Button>
+
           </div>
           
           {/* Stats */}
