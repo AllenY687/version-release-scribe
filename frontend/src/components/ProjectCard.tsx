@@ -1,11 +1,12 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Timeline } from '@/components/Timeline';
 import { ReleaseDialog } from '@/components/ReleaseDialog';
-import { Calendar, Clock, Target } from 'lucide-react';
+import { EditProjectDialog } from '@/components/EditProjectDialog';
+import { Calendar, Clock, Target, Pencil } from 'lucide-react';
 import { format } from 'date-fns';
+import { Button } from '@/components/ui/button';
 
 export interface Release {
   id: string;
@@ -34,6 +35,7 @@ export interface Project {
 
 interface ProjectCardProps {
   project: Project;
+  onEditProject?: (project: Project) => void;
 }
 
 export const getAttachmentType = (contentType: string): Release['attachments'][0]['type'] => {
@@ -44,8 +46,9 @@ export const getAttachmentType = (contentType: string): Release['attachments'][0
   return 'document';
 };
 
-export const ProjectCard = ({ project }: ProjectCardProps) => {
+export const ProjectCard = ({ project, onEditProject }: ProjectCardProps) => {
   const [selectedRelease, setSelectedRelease] = useState<Release | null>(null);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -71,9 +74,21 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
         <CardHeader className="pb-4">
           <div className="flex items-start justify-between">
             <div className="flex-1">
-              <CardTitle className="text-xl font-semibold text-slate-900 mb-2">
-                {project.name}
-              </CardTitle>
+              <div className="flex items-center justify-between mb-2">
+                <CardTitle className="text-xl font-semibold text-slate-900">
+                  {project.name}
+                </CardTitle>
+                {onEditProject && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setIsEditDialogOpen(true)}
+                    className="text-slate-500 hover:text-slate-700"
+                  >
+                    <Pencil className="h-4 w-4" />
+                  </Button>
+                )}
+              </div>
               <p className="text-slate-600 mb-4">{project.description}</p>
               
               <div className="flex items-center gap-4 text-sm text-slate-500">
@@ -115,6 +130,15 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
         open={!!selectedRelease}
         onOpenChange={(open) => !open && setSelectedRelease(null)}
       />
+
+      {onEditProject && (
+        <EditProjectDialog
+          project={project}
+          open={isEditDialogOpen}
+          onOpenChange={setIsEditDialogOpen}
+          onEditProject={onEditProject}
+        />
+      )}
     </>
   );
 };

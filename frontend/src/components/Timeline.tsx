@@ -1,9 +1,9 @@
-
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { format, differenceInDays } from 'date-fns';
 import { Tag, Clock, FileText } from 'lucide-react';
 import { Project, Release } from '@/components/ProjectCard';
+import { useMemo } from 'react';
 
 interface TimelineProps {
   project: Project;
@@ -11,12 +11,11 @@ interface TimelineProps {
 }
 
 export const Timeline = ({ project, onReleaseClick }: TimelineProps) => {
-  const today = new Date();
+  const today = useMemo(() => new Date(), []);
 
-  const isReleaseInPast = (date: Date) => date <= today;
+  const isReleaseInPast = useMemo(() => (date: Date) => date <= today, [today]);
 
   const getCurrentProgress = () => {
-    const today = new Date();
     const totalDays = differenceInDays(project.endDate, project.startDate);
     const daysFromStart = differenceInDays(today, project.startDate);
     return Math.max(0, Math.min(100, (daysFromStart / totalDays) * 100));

@@ -8,6 +8,8 @@ import { addDays } from 'date-fns';
 
 const POLL_INTERVAL = 60_000; // 1 minute in milliseconds
 
+
+
 const Index = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
@@ -19,12 +21,16 @@ const Index = () => {
 
     const fetchProjects = async () => {
       try {
+        // marked for modification
+
         const response = await fetch('/api/disk-release-notes');
         if (!response.ok) {
           throw new Error('Failed to fetch projects');
         }
         const releases = await response.json();
         console.log('Fetched releases:', releases);
+
+        // fetch local files, not through api to backend
         
         // Group releases by project (repository)
         const projectMap = new Map<string, Project>();
@@ -48,10 +54,11 @@ const Index = () => {
           const project = projectMap.get(projectId)!;
           
           // Add release to project
+          const releaseDate = new Date(release.published_at);
           project.releases.push({
             id: release.id.toString(),
             version: release.tag_name || 'v1.0.0',
-            date: new Date(release.published_at),
+            date: releaseDate,
             title: release.name || 'Release',
             notes: release.body || 'No release notes available',
             attachments: release.assets?.map((asset: any) => ({
@@ -62,6 +69,11 @@ const Index = () => {
               contentType: asset.content_type,
             })) || []
           });
+
+          // Update project start date if this release is older
+          if (releaseDate < project.startDate) {
+            project.startDate = releaseDate;
+          }
         });
 
         setProjects(Array.from(projectMap.values()));
@@ -91,6 +103,14 @@ const Index = () => {
     setProjects([...projects, newProject]);
   };
 
+  const handleEditProject = (editedProject: Project) => {
+    setProjects(projects.map(p => p.id === editedProject.id ? editedProject : p));
+    toast({
+      title: "Success",
+      description: "Project updated successfully",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -106,6 +126,7 @@ const Index = () => {
                 <p className="text-slate-600">Track your projects and releases</p>
               </div>
             </div>
+
             <Button 
               onClick={() => setIsCreateDialogOpen(true)}
               className="bg-blue-600 hover:bg-blue-700 text-white"
@@ -113,6 +134,7 @@ const Index = () => {
               <Plus className="h-4 w-4 mr-2" />
               New Project
             </Button>
+
           </div>
           
           {/* Stats */}
@@ -146,7 +168,11 @@ const Index = () => {
           ) : (
             <>
               {projects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
+                <ProjectCard 
+                  key={project.id} 
+                  project={project} 
+                  onEditProject={handleEditProject}
+                />
               ))}
               
               {projects.length === 0 && (
