@@ -1,4 +1,3 @@
-
 import {
   Dialog,
   DialogContent,
@@ -142,10 +141,6 @@ export const ReleaseDialog = ({ release, open, onOpenChange }: ReleaseDialogProp
         <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Close
-          </Button>
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-            <ExternalLink className="h-4 w-4 mr-2" />
-            View Full Release
           </Button>
         </div>
       </DialogContent>
