@@ -54,10 +54,11 @@ const Index = () => {
           const project = projectMap.get(projectId)!;
           
           // Add release to project
+          const releaseDate = new Date(release.published_at);
           project.releases.push({
             id: release.id.toString(),
             version: release.tag_name || 'v1.0.0',
-            date: new Date(release.published_at),
+            date: releaseDate,
             title: release.name || 'Release',
             notes: release.body || 'No release notes available',
             attachments: release.assets?.map((asset: any) => ({
@@ -68,6 +69,11 @@ const Index = () => {
               contentType: asset.content_type,
             })) || []
           });
+
+          // Update project start date if this release is older
+          if (releaseDate < project.startDate) {
+            project.startDate = releaseDate;
+          }
         });
 
         setProjects(Array.from(projectMap.values()));
@@ -95,6 +101,14 @@ const Index = () => {
       releases: []
     };
     setProjects([...projects, newProject]);
+  };
+
+  const handleEditProject = (editedProject: Project) => {
+    setProjects(projects.map(p => p.id === editedProject.id ? editedProject : p));
+    toast({
+      title: "Success",
+      description: "Project updated successfully",
+    });
   };
 
   return (
@@ -154,7 +168,11 @@ const Index = () => {
           ) : (
             <>
               {projects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
+                <ProjectCard 
+                  key={project.id} 
+                  project={project} 
+                  onEditProject={handleEditProject}
+                />
               ))}
               
               {projects.length === 0 && (

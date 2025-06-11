@@ -68,12 +68,16 @@ app.get('/api/disk-release-notes', async (req, res) => {
         const reverseIdx = total - 1 - idx;
         const versionNum = reverseIdx.toString();
 
+        const match = body.match(/[-*•]?\s*Date:\s*(\d{4}-\d{2}-\d{2})/);
+        const dateStr = match?.[1];
+        const isoDate = dateStr ? new Date(dateStr).toISOString() : new Date().toISOString();
+
         return {
           id: versionNum,
           tag_name: `v1.0.${versionNum}`,
           name: `Release ${versionNum}`,
-          created_at: new Date().toISOString(),
-          published_at: new Date().toISOString(),
+          created_at: isoDate,
+          published_at: isoDate,
           body: body,
           assets: [],
           repository: {
